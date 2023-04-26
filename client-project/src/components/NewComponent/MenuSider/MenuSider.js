@@ -30,6 +30,7 @@ export const MenuSider = (props) => {
       key: "clients",
       icon: <HomeOutlined />,
       label: "Clientes",
+
       subMenu: [
         {
           key: "clients/list",
