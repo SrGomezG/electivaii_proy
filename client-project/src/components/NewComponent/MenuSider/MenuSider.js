@@ -14,7 +14,7 @@ export const MenuSider = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const navigateTo = (e) => {
-    const path = e.key;
+    const path = new URL(e.key, window.location.origin).pathname;
     console.log(path);
     navigate(path);
   };
@@ -38,6 +38,20 @@ export const MenuSider = (props) => {
           label: "Lista de clientes",
         },
         { key: "clients/new", icon: <TeamOutlined />, label: "Nuevo Cliente" },
+      ],
+    },
+    {
+      key: "services",
+      icon: <HomeOutlined />,
+      label: "Services",
+
+      subMenu: [
+        {
+          key: "services/list",
+          icon: <TeamOutlined />,
+          label: "Lista de servicios",
+        },
+        { key: "services/new", icon: <TeamOutlined />, label: "Nuevo servicio" },
       ],
     },
     { key: "news", icon: <SettingOutlined />, label: "Gestión de noticias" },
