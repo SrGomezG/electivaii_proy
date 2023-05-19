@@ -1,10 +1,11 @@
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const jwt = require("../utils/jwt");
+const depaMuni = require("../routes/departamentoMunicipio");
 
 /* Función que permite el registro de un usuario nuevo en el sistema */
 const register = async (req, res) => {
-  const { firstname, lastname, email, password } = req.body;
+  const { firstname, lastname, email, password, departamento, municipio } = req.body;
   if (!email) return res.status(400).send({ msg: "El email es requerido" });
   if (!password)
     return res.status(400).send({ msg: "La contraseña es requerida" });
@@ -19,7 +20,18 @@ const register = async (req, res) => {
     role: "user",
     active: false,
     password: hashPassword,
+    departamento,
+    municipio,
+
   });
+
+  const deptExist = async (departamento, municipio) => {
+    const projection = await depaMuni.findOne({ departamento, municipio });
+    return projection !== null;
+  }
+  if (!deptExist) {
+    res.status(400).send({ msg: "Error al encontrar el departamento" });
+  }
 
   try {
     const userStorage = await user.save();

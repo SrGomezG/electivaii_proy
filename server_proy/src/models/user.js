@@ -11,8 +11,8 @@ const UserSchema = mongoose.Schema({
   role: String,
   active: Boolean,
   avatar: String,
-  municipio: String,
   departamento: String,
+  municipio: String,
 });
 
 module.exports = mongoose.model("User", UserSchema);

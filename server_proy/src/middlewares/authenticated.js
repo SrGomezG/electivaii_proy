@@ -1,6 +1,6 @@
 const jwt = require("../utils/jwt");
 
-const asureAuth = (req, res, next) => {
+const ensureAuth = (req, res, next) => {
   if (!req.headers.authorization) {
     return res
       .status(403)
@@ -22,5 +22,5 @@ const asureAuth = (req, res, next) => {
 };
 
 module.exports = {
-  asureAuth,
+  ensureAuth,
 };
